@@ -95,16 +95,14 @@ f2048: #a0: Direccion de la matriz, a1: Tipo de movimiento
 						
 MoverDerecha:#a0: Direccion de la matriz
 
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
 	sw $s3, 12($sp) 
 	sw $s4, 16($sp)
 	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero #Direccion de la matriz
 	addi $s1, $zero, 3 #i
@@ -172,24 +170,20 @@ MoverDerecha:#a0: Direccion de la matriz
 		lw $s3, 12($sp)
 		lw $s4, 16($sp)
 		lw $s5, 20($sp)
-		lw $s6, 24($sp)
-		lw $s7, 28($sp)
-		lw $ra, 32($sp)	
-		addi $sp, $sp, 36 #Se restaura la pila
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se restaura la pila
 		jr $ra	
 		
 MoverAbajo:#a0: Direccion de la matriz
 
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
-	sw $s3, 12($sp)
+	sw $s3, 12($sp) 
 	sw $s4, 16($sp)
 	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero #Dirección de la matriz
 	addi $s1, $zero, 3 #i
@@ -254,30 +248,26 @@ MoverAbajo:#a0: Direccion de la matriz
 			      	addi $s1, $s1 -1
 			      	j BuclePrincipalAbajo		
 	ExitAbajo:	
-	lw $s0, 0($sp)
-	lw $s1, 4($sp)
-	lw $s2, 8($sp)
-	lw $s3, 12($sp)
-	lw $s4, 16($sp)
-	lw $s5, 20($sp)
-	lw $s6, 24($sp)
-	lw $s7, 28($sp)
-	lw $ra, 32($sp)	
-	addi $sp, $sp, 36 #Se restaura en la pila	
-	jr $ra	
+		lw $s0, 0($sp)
+		lw $s1, 4($sp)
+		lw $s2, 8($sp)
+		lw $s3, 12($sp)
+		lw $s4, 16($sp)
+		lw $s5, 20($sp)
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se restaura la pila
+		jr $ra	
 		
 MoverIzquierda:#a0: Direccion de la matriz
 
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
-	sw $s3, 12($sp)
+	sw $s3, 12($sp) 
 	sw $s4, 16($sp)
 	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero #Direccion de la matriz
 	addi $s1, $zero, 0 #i
@@ -342,30 +332,26 @@ MoverIzquierda:#a0: Direccion de la matriz
 			      	addi $s2, $s2, 1
 			      	j BuclePrincipalIzquierda		
 	ExitIzquierda:	
-	lw $s0, 0($sp)
-	lw $s1, 4($sp)
-	lw $s2, 8($sp)
-	lw $s3, 12($sp)
-	lw $s4, 16($sp)
-	lw $s5, 20($sp)
-	lw $s6, 24($sp)
-	lw $s7, 28($sp)
-	lw $ra, 32($sp)	
-	addi $sp, $sp, 36 #Se restaura en la pila	
-	jr $ra	
+		lw $s0, 0($sp)
+		lw $s1, 4($sp)
+		lw $s2, 8($sp)
+		lw $s3, 12($sp)
+		lw $s4, 16($sp)
+		lw $s5, 20($sp)
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se restaura la pila
+		jr $ra	
 		
 MoverArriba:#a0: Direccion de la matriz
 
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
-	sw $s3, 12($sp)
+	sw $s3, 12($sp) 
 	sw $s4, 16($sp)
 	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero #Direccion de la matriz
 	addi $s1, $zero, 0 #i
@@ -431,29 +417,25 @@ MoverArriba:#a0: Direccion de la matriz
 			      	addi $s1, $s1 1
 			      	j BuclePrincipalArriba		
 	ExitArriba:	
-			lw $s0, 0($sp)
-	lw $s1, 4($sp)
-	lw $s2, 8($sp)
-	lw $s3, 12($sp)
-	lw $s4, 16($sp)
-	lw $s5, 20($sp)
-	lw $s6, 24($sp)
-	lw $s7, 28($sp)
-	lw $ra, 32($sp)	
-	addi $sp, $sp, 36 #Se guarda en la pila	
-	jr $ra	
+		lw $s0, 0($sp)
+		lw $s1, 4($sp)
+		lw $s2, 8($sp)
+		lw $s3, 12($sp)
+		lw $s4, 16($sp)
+		lw $s5, 20($sp)
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se restaura la pila
+		jr $ra	
 	
 SumaDerecha:
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
-	sw $s3, 12($sp)
-	sw $s4, 16($sp)
-	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $s5, 12($sp)
+	sw $s6, 16($sp)
+	sw $s7, 20($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero
 	addi $s1, $zero, 3 # Posicion inicial de recorrido 
@@ -505,29 +487,25 @@ SumaDerecha:
 			beq $s2, $zero, IncrementaISumaDerecha#Si estoy en j 0 paso a la siguiente fila
 			j BucleSumaDerecha
 	ExitSumaDerecha:
-			lw $s0, 0($sp)
-	lw $s1, 4($sp)
-	lw $s2, 8($sp)
-	lw $s3, 12($sp)
-	lw $s4, 16($sp)
-	lw $s5, 20($sp)
-	lw $s6, 24($sp)
-	lw $s7, 28($sp)
-	lw $ra, 32($sp)	
-	addi $sp, $sp, 36 #Se guarda en la pila	
-	jr $ra	
+		lw $s0, 0($sp)
+		lw $s1, 4($sp)
+		lw $s2, 8($sp)
+		lw $s5, 12($sp)
+		lw $s6, 16($sp)
+		lw $s7, 20($sp)
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se guarda en la pila	
+		jr $ra		
 
 SumaAbajo:
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
-	sw $s3, 12($sp)
-	sw $s4, 16($sp)
-	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $s5, 12($sp)
+	sw $s6, 16($sp)
+	sw $s7, 20($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero
 	addi $s1, $zero, 3 # Posicion inicial de recorrido 
@@ -582,27 +560,23 @@ SumaAbajo:
 		lw $s0, 0($sp)
 		lw $s1, 4($sp)
 		lw $s2, 8($sp)
-		lw $s3, 12($sp)
-		lw $s4, 16($sp)
-		lw $s5, 20($sp)
-		lw $s6, 24($sp)
-		lw $s7, 28($sp)
-		lw $ra, 32($sp)	
-		addi $sp, $sp, 36 #Se guarda en la pila	
-		jr $ra	
+		lw $s5, 12($sp)
+		lw $s6, 16($sp)
+		lw $s7, 20($sp)
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se guarda en la pila	
+		jr $ra		
 
 		
 SumaIzquierda:
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
-	sw $s3, 12($sp)
-	sw $s4, 16($sp)
-	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $s5, 12($sp)
+	sw $s6, 16($sp)
+	sw $s7, 20($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero
 	add $s1, $zero, $zero # Posicion inicial de recorrido 
@@ -661,27 +635,23 @@ SumaIzquierda:
 		lw $s0, 0($sp)
 		lw $s1, 4($sp)
 		lw $s2, 8($sp)
-		lw $s3, 12($sp)
-		lw $s4, 16($sp)
-		lw $s5, 20($sp)
-		lw $s6, 24($sp)
-		lw $s7, 28($sp)
-		lw $ra, 32($sp)	
-		addi $sp, $sp, 36 #Se guarda en la pila	
-		jr $ra	
+		lw $s5, 12($sp)
+		lw $s6, 16($sp)
+		lw $s7, 20($sp)
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se guarda en la pila	
+		jr $ra		
 			
 
 SumaArriba:
-	addi $sp, $sp, -36#Se guarda en la pila
+	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
-	sw $s3, 12($sp)
-	sw $s4, 16($sp)
-	sw $s5, 20($sp)
-	sw $s6, 24($sp)
-	sw $s7, 28($sp)
-	sw $ra, 32($sp)
+	sw $s5, 12($sp)
+	sw $s6, 16($sp)
+	sw $s7, 20($sp)
+	sw $ra, 24($sp)
 	
 	add $s5, $a0, $zero
 	add $s2, $zero, $zero # Posicion inicial de recorrido 
@@ -740,11 +710,9 @@ SumaArriba:
 		lw $s0, 0($sp)
 		lw $s1, 4($sp)
 		lw $s2, 8($sp)
-		lw $s3, 12($sp)
-		lw $s4, 16($sp)
-		lw $s5, 20($sp)
-		lw $s6, 24($sp)
-		lw $s7, 28($sp)
-		lw $ra, 32($sp)	
-		addi $sp, $sp, 36 #Se guarda en la pila	
+		lw $s5, 12($sp)
+		lw $s6, 16($sp)
+		lw $s7, 20($sp)
+		lw $ra, 24($sp)	
+		addi $sp, $sp, 28 #Se guarda en la pila	
 		jr $ra		
