@@ -427,7 +427,7 @@ MoverArriba:#a0: Direccion de la matriz
 		addi $sp, $sp, 28 #Se restaura la pila
 		jr $ra	
 	
-SumaDerecha:
+SumaDerecha: # Funcion que suma cuando el movimiento es a la derecha
 	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
@@ -445,9 +445,8 @@ SumaDerecha:
 		add $a0, $s5, $zero
 		add $a1, $s1, $zero
 		add $a2, $s2, $zero
-		jal LeeAij
+		jal LeeAij # Leo el numero
 		add $s6, $zero, $v0 # Numero leido lo pongo en $s6
-		#beq $s0, $zero, IncrementaISumaAbajo # Si es cero paso a la siguiente fila
 		addi $s2, $s2, -1
 		
 		add $a0, $s5, $zero
@@ -455,32 +454,31 @@ SumaDerecha:
 		add $a2, $s2, $zero
 		jal LeeAij # Me devuelve en $v0 el valor de la posicion siguiente
 		add $s7, $v0, $zero # Numero leido lo pongo en $s1
-		beq $s7, $s6, SumaDer
-		bne $s7, $s6, IncrementoJSumaDerecha
+		beq $s7, $s6, SumaDer # Si son iguales los sumo
+		bne $s7, $s6, IncrementoJSumaDerecha 
 			
 		SumaDer:
-			#addi $a1, $a1, 1
 			add $a0, $s5, $zero
 			add $a1, $s1, $zero
 			add $a2, $s2, $zero
 			add $a3, $zero, $zero
-			jal EscAij
+			jal EscAij # Escribo en la posicion un cero
 			addi $s2, $s2, 1
 			
 			add $a0, $s5, $zero
 			add $a1, $s1, $zero
 			add $a2, $s2, $zero
-			add $a3, $s7, $s6
-			jal EscAij
+			add $a3, $s7, $s6 
+			jal EscAij # Escribo en la matriz la suma de ambos numeros
 			
-			addi $s2, $s2, -1
+			addi $s2, $s2, -1 # Retrocedo una posicion
 			beq $s2, $zero, IncrementaISumaDerecha#Si estoy en j 0 paso a la siguiente fila
 			bne $s2, $zero, IncrementoJSumaDerecha
 			
 		IncrementaISumaDerecha:
 			beq $s1, $zero, ExitSumaDerecha
-			addi $s1, $s1, -1
-			addi $s2, $zero, 3
+			addi $s1, $s1, -1 # Paso a la siguiente fila y reseteo el indice de columnas a 3
+			addi $s2, $zero, 3 
 			j BucleSumaDerecha
 				
 		IncrementoJSumaDerecha:
@@ -497,7 +495,7 @@ SumaDerecha:
 		addi $sp, $sp, 28 #Se guarda en la pila	
 		jr $ra		
 
-SumaAbajo:
+SumaAbajo: # Funcion que suma cuando el movimiento es a la izquierda
 	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
@@ -513,8 +511,8 @@ SumaAbajo:
 	
 	BucleSumaAbajo:
 		add $a0, $s5, $zero
-		add $a2, $s1, $zero
-		add $a1, $s2, $zero
+		add $a2, $s1, $zero # Columnas
+		add $a1, $s2, $zero# Filas
 		jal LeeAij
 		add $s6, $zero, $v0 # Numero leido lo pongo en $s6
 		#beq $s0, $zero, IncrementaISumaAbajo # Si es cero paso a la siguiente fila
@@ -525,32 +523,31 @@ SumaAbajo:
 		add $a1, $s2, $zero
 		jal LeeAij # Me devuelve en $v0 el valor de la posicion siguiente
 		add $s7, $v0, $zero # Numero leido lo pongo en $s1
-		beq $s7, $s6, SumaAbaj
+		beq $s7, $s6, SumaAbaj # Si los numeros leidos son iguales los sumo
 		bne $s7, $s6, IncrementoJSumaAbajo
 			
 		SumaAbaj:
-			#addi $a1, $a1, 1
 			add $a0, $s5, $zero
 			add $a2, $s1, $zero
 			add $a1, $s2, $zero
 			add $a3, $zero, $zero
-			jal EscAij
-			addi $s2, $s2, 1
+			jal EscAij # Escribo en la matriz un cero
+			addi $s2, $s2, 1 # Aumento en la fila
 			
 			add $a0, $s5, $zero
 			add $a2, $s1, $zero
 			add $a1, $s2, $zero
 			add $a3, $s7, $s6
-			jal EscAij
+			jal EscAij # Escribo los numeros sumados en la matriz
 			
-			addi $s2, $s2, -1
+			addi $s2, $s2, -1 # Retrocedo un fila
 			beq $s2, $zero, IncrementaISumaAbajo#Si estoy en j 0 paso a la siguiente fila
 			bne $s2, $zero, IncrementoJSumaAbajo
 			
 		IncrementaISumaAbajo:
-			beq $s1, $zero, ExitSumaAbajo
-			addi $s1, $s1, -1
-			addi $s2, $zero, 3
+			beq $s1, $zero, ExitSumaAbajo # Si estoy en la ultima fila
+			addi $s1, $s1, -1 # Retrocedo una columna
+			addi $s2, $zero, 3 # Reseteo las filas
 			j BucleSumaAbajo
 				
 		IncrementoJSumaAbajo:
@@ -567,7 +564,6 @@ SumaAbajo:
 		addi $sp, $sp, 28 #Se guarda en la pila	
 		jr $ra		
 
-		
 SumaIzquierda:
 	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
@@ -586,28 +582,27 @@ SumaIzquierda:
 		add $a0, $s5, $zero
 		add $a1, $s1, $zero
 		add $a2, $s2, $zero
-		jal LeeAij
+		jal LeeAij # Leo el numero
 		
 		add $s6, $zero, $v0 # Numero leido lo pongo en $s6
 		#beq $s0, $zero, IncrementaISumaAbajo # Si es cero paso a la siguiente fila
 		
-		addi $s2, $s2, 1
+		addi $s2, $s2, 1 # Aumento la columna
 		
 		add $a0, $s5, $zero
 		add $a1, $s1, $zero
 		add $a2, $s2, $zero
 		jal LeeAij # Me devuelve en $v0 el valor de la posicion siguiente
 		add $s7, $v0, $zero # Numero leido lo pongo en $s7
-		beq $s7, $s6, SumaIzq
-		bne $s7, $s6, IncrementoJSumaIzquierda
+		beq $s7, $s6, SumaIzq # Si los numeros son iguales los sumo
+		bne $s7, $s6, IncrementoJSumaIzquierda # Si no son iguales paso a la siguiente columna
 			
 		SumaIzq:
-			#addi $a1, $a1, 1
 			add $a0, $s5, $zero
 			add $a1, $s1, $zero
 			add $a2, $s2, $zero
 			add $a3, $zero, $zero
-			jal EscAij
+			jal EscAij # Escribo un cero
 			
 			addi $s2, $s2, -1
 			
@@ -615,15 +610,15 @@ SumaIzquierda:
 			add $a1, $s1, $zero
 			add $a2, $s2, $zero
 			add $a3, $s7, $s6
-			jal EscAij
+			jal EscAij # Escribo la suma de los numeros
 			
-			addi $s2, $s2, 1
+			addi $s2, $s2, 1 # Aumento la columna
 			beq $s2, 3, IncrementaISumaIzquierda#Si estoy en j 3 paso a la siguiente fila
 			bne $s2, 3, IncrementoJSumaIzquierda
 			
 		IncrementaISumaIzquierda:
 			beq $s1, 3, ExitSumaIzquierda# Si estoy en i 3
-			addi $s1, $s1, 1
+			addi $s1, $s1, 1 # Aumento la fila y reseteo la columna
 			add $s2, $zero, $zero
 			j BucleSumaIzquierda
 				
@@ -642,7 +637,6 @@ SumaIzquierda:
 		addi $sp, $sp, 28 #Se guarda en la pila	
 		jr $ra		
 			
-
 SumaArriba:
 	addi $sp, $sp, -28#Se guarda en la pila
 	sw $s0, 0($sp)
@@ -661,10 +655,9 @@ SumaArriba:
 		add $a0, $s5, $zero
 		add $a2, $s1, $zero
 		add $a1, $s2, $zero
-		jal LeeAij
+		jal LeeAij # Leo la primera posicion
 		
 		add $s6, $zero, $v0 # Numero leido lo pongo en $s6
-		#beq $s0, $zero, IncrementaISumaAbajo # Si es cero paso a la siguiente fila
 		
 		addi $s2, $s2, 1
 		
@@ -673,37 +666,36 @@ SumaArriba:
 		add $a1, $s2, $zero
 		jal LeeAij # Me devuelve en $v0 el valor de la posicion siguiente
 		add $s7, $v0, $zero # Numero leido lo pongo en $s7
-		beq $s7, $s6, SumaArr
-		bne $s7, $s6, IncrementoJSumaArriba
+		beq $s7, $s6, SumaArr # Si son iguales los sumo
+		bne $s7, $s6, IncrementoJSumaArriba # Si no son iguales paso a la siguiente columna
 			
 		SumaArr:
-			#addi $a1, $a1, 1
-			add $a0, $s5, $zero
+			add $a0, $s5, $zero 
 			add $a2, $s1, $zero
 			add $a1, $s2, $zero
 			add $a3, $zero, $zero
-			jal EscAij
+			jal EscAij # Escribo un cero
 			
-			addi $s2, $s2, -1
+			addi $s2, $s2, -1 # Retrocedo una posicion de j
 			
 			add $a0, $s5, $zero
 			add $a2, $s1, $zero
 			add $a1, $s2, $zero
 			add $a3, $s7, $s6
-			jal EscAij
+			jal EscAij	# Escribo en la matriz la suma de los dos numeros
 			
 			addi $s2, $s2, 1
 			beq $s2, 3, IncrementaISumaArriba#Si estoy en j 3 paso a la siguiente fila
 			bne $s2, 3, IncrementoJSumaArriba
 			
 		IncrementaISumaArriba:
-			beq $s1, 3, ExitSumaArriba # Si estoy en i 3
-			addi $s1, $s1, 1
-			add $s2, $zero, $zero
+			beq $s1, 3, ExitSumaArriba # Si estoy en j 3
+			addi $s1, $s1, 1 # Aumento las columnas y reseteo las filas
+			add $s2, $zero, $zero 
 			j BucleSumaArriba
 				
 		IncrementoJSumaArriba:
-			beq $s2, 3, IncrementaISumaArriba#Si estoy en j 0 paso a la siguiente fila
+			beq $s2, 3, IncrementaISumaArriba#Si estoy en i 3 paso a la siguiente columna
 			j BucleSumaArriba
 			
 	ExitSumaArriba:
